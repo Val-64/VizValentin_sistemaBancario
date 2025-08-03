@@ -58,4 +58,28 @@ INSERT INTO cuentas (cliente, tipo, moneda, fecha_apertura) VALUES
 (4, 'Caja de ahorro', 'USD', '2020-07-20'),
 (5, 'Cuenta corriente', 'USD', '2021-02-10');
 
+/*
+UPDATE cuentas 
+SET saldo = 50000.17
+WHERE cuenta_id = 1;
 
+UPDATE cuentas 
+SET saldo = 24861.25
+WHERE cuenta_id = 2;
+
+UPDATE cuentas 
+SET saldo = 560.10
+WHERE cuenta_id = 3;
+
+UPDATE cuentas 
+SET saldo = 1050.00
+WHERE cuenta_id = 4;
+
+UPDATE cuentas 
+SET saldo = 3200.50
+WHERE cuenta_id = 5;
+*/
+
+/*
+DELETE FROM cuentas WHERE cuenta_id > 5
+*/

@@ -64,3 +64,5 @@ CREATE TABLE IF NOT EXISTS cuentas(
     PRIMARY KEY(cuenta_id),
     FOREIGN KEY(cliente) REFERENCES clientes(cliente_id)
 );
+
+ALTER TABLE cuentas ADD saldo DECIMAL(10,2) UNSIGNED DEFAULT 0;
