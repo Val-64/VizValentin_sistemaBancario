@@ -4,6 +4,7 @@
         1. Sucursales.
         2. Clientes.
         3. Cuentas.
+        4. Movimientos.
 */
 
 -- a. Creación de base de datos.
@@ -12,7 +13,7 @@ USE proyecto_01;
 
 -- b. Creacion de tablas.
 
--- (1). Sucursales.
+-- 1. Sucursales.
 CREATE TABLE IF NOT EXISTS sucursales(
 	sucursal_id INT AUTO_INCREMENT,
     nombre VARCHAR(50) NOT NULL,
@@ -23,7 +24,7 @@ CREATE TABLE IF NOT EXISTS sucursales(
     PRIMARY KEY(sucursal_id)
 );
 
--- (2). Clientes.
+-- 2. Clientes.
 CREATE TABLE IF NOT EXISTS clientes(
 	cliente_id INT AUTO_INCREMENT,
     sucursal_id INT,
@@ -40,7 +41,7 @@ CREATE TABLE IF NOT EXISTS clientes(
     FOREIGN KEY(sucursal_id) REFERENCES sucursales(sucursal_id)
 );
 
--- (3). Cuentas.
+-- 3. Cuentas.
 CREATE TABLE IF NOT EXISTS cuentas(
 	cuenta_id INT AUTO_INCREMENT,
     cliente_id INT,
@@ -52,3 +53,23 @@ CREATE TABLE IF NOT EXISTS cuentas(
     PRIMARY KEY(cuenta_id),
     FOREIGN KEY(cliente_id) REFERENCES clientes(cliente_id)
 );
+
+-- 4. Movimientos.
+CREATE TABLE IF NOT EXISTS movimientos(
+	movimiento_id INT AUTO_INCREMENT,
+	cuenta_origen INT,
+    cuenta_destino INT,
+    tipo_movimiento ENUM('Transferencia', 'Deposito', 'Retiro') NOT NULL DEFAULT ('Transferencia'),
+    monto DECIMAL(12,2) UNSIGNED NOT NULL,
+    fecha DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    descripcion VARCHAR(100),
+    
+    PRIMARY KEY(movimiento_id),
+    FOREIGN KEY(cuenta_origen) REFERENCES cuentas(cuenta_id),
+    FOREIGN KEY(cuenta_destino) REFERENCES cuentas(cuenta_id)
+);
+
+
+
+
+

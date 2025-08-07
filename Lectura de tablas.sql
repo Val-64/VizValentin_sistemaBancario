@@ -104,6 +104,3 @@ FROM cuentas cue
 INNER JOIN clientes cli ON cue.cliente_id = cli.cliente_id
 INNER JOIN sucursales suc ON cli.sucursal_id = suc.sucursal_id;
 
-
-
-
