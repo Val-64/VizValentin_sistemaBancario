@@ -5,6 +5,9 @@
     2. Clientes.
     3. Cuentas.
     4. Movimientos.
+        a. Depositos.
+        b. Retiros.
+        c. Transferencias.
 */
 
 USE proyecto_01;
@@ -41,20 +44,18 @@ INSERT INTO cuentas (cliente_id, tipo, moneda, fecha_apertura) VALUES
 (3, 'Caja de ahorro', 'ARG', '2025-02-19');
 
 -- 4. Movimientos.
-SELECT * FROM movimientos;
-
--- Depositos.
+--  a. Depositos.
 INSERT INTO movimientos (cuenta_destino, tipo_movimiento, monto) VALUES
 (1, 'Deposito', 10000.00),
 (3, 'Deposito', 5500.00),
 (4, 'Deposito', 500.00);
 
--- Extracciones.
+-- b. Extracciones.
 INSERT INTO movimientos (cuenta_origen, tipo_movimiento, monto) VALUES
 (1, 'Retiro', 1000),
 (1, 'Retiro', 100);
 
--- Tranferencias.
+-- c. Tranferencias.
 INSERT INTO movimientos (cuenta_origen, cuenta_destino, monto, descripcion) VALUES
 (1, 2, 3500, 'Varios'),
 (2, 7, 1000, 'Expensas'),

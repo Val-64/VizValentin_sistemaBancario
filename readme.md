@@ -54,7 +54,7 @@ Una entidad financiera se encarga de organizar las siguientes tablas.
 
 ## DIAGRAMA ENTIDAD-RELACIÓN
 
-![Modelo Base de Datos](assets/image.png)
+![Modelo Base de Datos](assets/diagrama_img.png)
 
 ## ENTIDADES
 
