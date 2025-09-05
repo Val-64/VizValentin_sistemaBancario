@@ -69,7 +69,25 @@ CREATE TABLE IF NOT EXISTS movimientos(
     FOREIGN KEY(cuenta_destino) REFERENCES cuentas(cuenta_id)
 );
 
+CREATE TABLE IF NOT EXISTS cliente_logs(
+	log_id INT AUTO_INCREMENT,
+    cliente_id INT,
+    fecha DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    accion ENUM('Agregado', 'Eliminado', 'Modificado') NOT NULL,
+    
+	PRIMARY KEY(log_id),
+    FOREIGN KEY(cliente_id) REFERENCES clientes(cliente_id)
+);
 
+CREATE TABLE IF NOT EXISTS cuenta_logs(
+	log_id INT AUTO_INCREMENT,
+    cuenta_id INT,
+    fecha DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    accion ENUM('Agregado', 'Eliminado', 'Modificado') NOT NULL,
+    
+	PRIMARY KEY(log_id),
+    FOREIGN KEY(cuenta_id) REFERENCES cuentas(cuenta_id)
+);
 
 
 
