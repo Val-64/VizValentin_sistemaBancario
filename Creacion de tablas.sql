@@ -5,8 +5,9 @@
         2. Clientes.
         3. Cuentas.
         4. Movimientos.
+        5. Logs de clientes.
+        6. Logs de cuentas.
 */
-
 -- a. Creación de base de datos.
 CREATE DATABASE IF NOT EXISTS proyecto_01;
 USE proyecto_01;
@@ -47,7 +48,6 @@ CREATE TABLE IF NOT EXISTS cuentas(
     cliente_id INT,
     tipo ENUM('Caja de ahorro', 'Cuenta corriente') NOT NULL,
     moneda ENUM('USD', 'ARG') NOT NULL,
-	fecha_apertura DATE NOT NULL,
     saldo DECIMAL(10, 2) UNSIGNED DEFAULT 0,
     
     PRIMARY KEY(cuenta_id),
@@ -69,6 +69,7 @@ CREATE TABLE IF NOT EXISTS movimientos(
     FOREIGN KEY(cuenta_destino) REFERENCES cuentas(cuenta_id)
 );
 
+-- 5. Logs de clientes.
 CREATE TABLE IF NOT EXISTS cliente_logs(
 	log_id INT AUTO_INCREMENT,
     cliente_id INT,
@@ -79,6 +80,7 @@ CREATE TABLE IF NOT EXISTS cliente_logs(
     FOREIGN KEY(cliente_id) REFERENCES clientes(cliente_id)
 );
 
+-- 6. Logs de cuentas.
 CREATE TABLE IF NOT EXISTS cuenta_logs(
 	log_id INT AUTO_INCREMENT,
     cuenta_id INT,
