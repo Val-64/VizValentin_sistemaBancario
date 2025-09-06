@@ -14,9 +14,9 @@ USE proyecto_01;
 
 -- 1. Insertar registros en tabla -sucursales-.
 INSERT INTO sucursales (nombre, telefono, calle, altura) VALUES
-('Banco Santander', '15 0800-1251', 'Avenida Rivadavia', 10445),
-('Banco Francés', '15 0800-6001', 'Mariano Acosta', 5423),
-('Banco Nación', '15 0800-9961', 'Calle Mitre', 851);
+('Suc. Rivadavia Norte', '15 0800-1251', 'Avenida Rivadavia', 10445),
+('Suc. Regional Acosta', '15 0800-6001', 'Mariano Acosta', 5423),
+('Suc. Eva Perón', '15 0800-9961', 'Av. Eva Perón', 5512);
 
 -- 2. Insertar registros en tabla -clientes-.
 INSERT INTO clientes (sucursal_id, nombre, apellido, dni, fecha_nacimiento, telefono, email) VALUES
@@ -32,16 +32,16 @@ INSERT INTO clientes (sucursal_id, nombre, apellido, dni, fecha_nacimiento, tele
 (2, 'Martina', 'Estefania', 10045678, '1976-11-14', '15 5123-4321', 'stefany@hotmail.com');
 
 -- 3. Cuentas.
-INSERT INTO cuentas (cliente_id, tipo, moneda, fecha_apertura) VALUES 
-(1, 'Caja de ahorro', 'ARG', '2022-05-10'),
-(2, 'Caja de ahorro', 'ARG', '2023-10-04'),
-(3, 'Cuenta corriente', 'ARG', '2025-02-18'),
-(4, 'Caja de ahorro', 'USD', '2020-07-20'),
-(5, 'Cuenta corriente', 'USD', '2021-02-10'),
-(2, 'Caja de ahorro', 'USD', '2024-10-06'),
-(9, 'Cuenta corriente', 'ARG','2024-03-06'),
-(10, 'Cuenta corriente', 'USD', '2021-07-15'),
-(3, 'Caja de ahorro', 'ARG', '2025-02-19');
+INSERT INTO cuentas (cliente_id, tipo, moneda) VALUES 
+(1, 'Caja de ahorro', 'ARG'),
+(2, 'Caja de ahorro', 'ARG'),
+(3, 'Cuenta corriente', 'ARG'),
+(4, 'Caja de ahorro', 'USD'),
+(5, 'Cuenta corriente', 'USD'),
+(2, 'Caja de ahorro', 'USD'),
+(9, 'Cuenta corriente', 'ARG'),
+(10, 'Cuenta corriente', 'USD'),
+(3, 'Caja de ahorro', 'ARG');
 
 -- 4. Movimientos.
 --  a. Depositos.
