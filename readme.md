@@ -1,64 +1,52 @@
 # Proyecto Base de Datos.
 
-### ▶ **Entrega N°1 Proyecto Base de Datos. *Coderhouse.***
+### **Entrega N°1 Proyecto Base de Datos. *Coderhouse.***
 
-### ▶ Temática: **Sistema Bancario**. 
+### Tema: **Sistema Bancario**. 
 
 ### ÍNDICE
 
-- ### [Introducción](#️introducción)
-- ### [Objetivos](#objetivos)
-- ### [Situacion problematica](#situación-problemática)
-- ### [Modelo de negocio](#módelo-de-negocio)
-- ### [Diagrama](#diagrama-entidad-relación)
-- ### [Entidades](#entidades)
-    - #### [Sucursales](#sucursales-1)
-    - #### [Clientes](#clientes-1)
-    - #### [Cuentas](#cuentas-1)
-    - #### [Movimientos](#movimientos-1)
+- ### [Introducción](#introducción-1)
+- ### [Archivos](#archivos-1)
+- ### [Diagrama ER](#diagrama-entidad-relación)
+- ### [Modelado de Tablas](#modelado-de-tablas-1)
+- ### [Funciones](#funciones-1)
 - ### [Vistas](#vistas-1)
-    - #### [Clientes](#view_clientes)
-    - #### [Cuentas](#view_cuentas)
-    - #### [Clientes y sucursales](#view_clientes_sucursales)
-    - #### [Cuentas y clientes](#view_cuentas_clientes)
-    - #### [Depositos](#view_depositos)
-    - #### [Retiros](#view_retiros)
-    - #### [Transferencias](#view_transferencias)
-    - #### [Cantidad de clientes](#view_cantidad_clientes)
-    - #### [Cantidad de cuentas](#view_cantidad_cuentas)
+- ### [Procedimientos](#procedimientos-1)
+- ### [Disparadores](#triggers)
 
 ## INTRODUCCIÓN
 
-Se presenta la **primer entrega** de un módelo básico de un sistema bancario simple dividido en cuatro archivos iniciales: 
+Este sistema representado en MySQL tiene el objetivo de administrar la información interna de un banco ficticio.
 
-1. Creacion de tablas.
-2. Inicializacion de tablas.
-3. Creacion de vistas.
-4. Lectura general.
+Se utilizarán las siguientes tablas:
 
-## OBJETIVOS
+- **Sucursales:** Contiene las direcciones y los numeros de telefono de cada sucursal
+- **Clientes:** Contiene información sobre los clientes pertenecientes a cada sucursal.
+- **Cuentas:** Guarda información sobre los tipos de cuenta, saldos sobre las cuentas de los clientes.
+- **Movimientos:** Tiene datos de transferencias, depositos y retiros de las cuentas de los clientes.
+- **Logs**: Tiene un registro historico para cada cuenta y cliente creada, modificada o eliminada.
 
-Organizar la información en tablas de sucursales, clientes, cuentas y movimientos.
+## ARCHIVOS
+Las tablas están divididas en **6 archivos principales** para crear correctamente la base de datos.
 
-## SITUACIÓN PROBLEMÁTICA
+Ejecutar en el siguiente orden cada archivo:
 
-Una organización tiene mucha demora al tener que consultar por información de muchos clientes cuando debe realizar auditorias o procesos burocráticos. Entonces se decide implementar un proceso de digitalización de información, con el fin de agilizar los procesos de consulta.
-
-## MÓDELO DE NEGOCIO
-Una entidad financiera se encarga de organizar las siguientes tablas.
-
- - Sucursales
- - Clientes
- - Cuentas
- - Movimientos
+- **01_tablas.sql**
+- **02_funciones.sql** 
+- **03_procedimientos.sql**
+- **04_vistas.sql**
+- **05_triggers.sql**
+- **06_datos_prueba.sql**
 
 ## DIAGRAMA ENTIDAD-RELACIÓN
 
-![Modelo Base de Datos](assets/diagrama_img.png)
+![Modelo Base de Datos](assets/diagrama-img.png)
 
-## ENTIDADES
+## MODELADO DE TABLAS
+###### Ver **[01_tablas.sql](./01_tablas.sql)**
 
- - ### Sucursales
+### Sucursales
 ---
 |  KEY  |     Campo      |       Tipo       |         Atributos         |        Referencias          |
 |-------|----------------|------------------|---------------------------|-----------------------------|
@@ -69,7 +57,7 @@ Una entidad financiera se encarga de organizar las siguientes tablas.
 |       |altura          |**INT**           |NOT NULL, UNSIGNED         |                             |
 
 
-- ### Clientes
+### Clientes
 ---
 |  KEY  |    Campo       |       Tipo       |         Atributos         |        Referencias          |
 |-------|----------------|------------------|---------------------------|-----------------------------|
@@ -82,7 +70,7 @@ Una entidad financiera se encarga de organizar las siguientes tablas.
 |       |telefono        |VARCHAR **(30)**  |NOT NULL, UNSIGNED, UNIQUE |                             |
 |       |email           |VARCHAR **(80)**  |UNSIGNED, NOT NULL         |                             |
 
-- ### Cuentas
+### Cuentas
 ---
 |  KEY  |    Campo       |        Tipo       |         Atributos         |        Referencias         |
 |-------|----------------|-------------------|---------------------------|----------------------------|
@@ -90,10 +78,9 @@ Una entidad financiera se encarga de organizar las siguientes tablas.
 |**FK** |cliente_id      |**INT**            |                           |clientes **(cliente_id)**   |
 |       |tipo            |ENUM **(...)**     |NOT NULL                   |                            |
 |       |moneda          |ENUM **(...)**     |NOT NULL                   |                            |
-|       |fecha_apertura  |**DATE**           |NOT NULL                   |                            |
 |       |saldo           |DECIMAL **(10, 2)**|UNSIGNED **DEFAULT 0**     |                            | 
 
-- ### Movimientos
+### Movimientos
 ---
 |  KEY  |    Campo       |        Tipo       |         Atributos         |        Referencias         |
 |-------|----------------|-------------------|---------------------------|----------------------------|
@@ -106,99 +93,105 @@ Una entidad financiera se encarga de organizar las siguientes tablas.
 |       |descripcion     |VARCHAR **(100)**  |                           |                            |
 
 
+## FUNCIONES
+###### Ver **[02_funciones.sql](./02_funciones.sql)**
+
+**FULLNAME**
+Concatena dos cadenas de texto con un espacio en el medio. Generalmente utilizada para unir nombre y apellido.
+
+
 ## VISTAS
 
- ### view_clientes
+###### Ver **[03_vistas.sql](./03_vistas.sql)**
 
- Muestra **todos** los **clientes** *existentes*.
+- ### **view_clientes**: 
+Devuelve todos los clientes y la sucursal a la que pertenecen.
 
- - **cliente**
- - **dni**
- - **edad**
- - **telefono**
- - **email**
+- ### **view_cuentas**:
+Devuelve todas la cuentas y el cliente al cual pertenecen.
 
-### view_cuentas
+- ### **view_movimientos**:
+Muestra los depositos, retiros y las transferencias de todos los clientes.
 
- Muestra **todas** las **cuentas** *existentes*.
+- ### **view_depositos**:
+Muestra solo los depositos de los clientes.
 
- - **no_cuenta**
- - **fecha_apertura**
- - **tipo**
- - **moneda**
- - **saldo**
+- ### **view_retiros**:
+Muestra todos los retiros de los clientes.
 
- ### view_clientes_sucursales
+- ### **view_transferencias**:
+Muestra todas las transferencias de los clientes.
 
- Muestra **todos** los **clientes** y sus **sucursales**.
+- ### **view_cantidad_cuentas**:
+Devuelve la cantidad de cuentas por cliente.
 
- - **sucursal**
- - **direccion**
- - **nombre_completo**
- - **dni**
- - **telefono**
- - **email**
+- ### **view_cantidad_cuentas**:
+Devuelve la cantidad de clientes por sucursal.
 
-### view_cuentas_clientes
 
- Muestra **todas** las **cuentas** por cada **cuentas**.
+## PROCEDIMIENTOS
+###### Ver **[04_procedimientos.sql](./04_procedimientos.sql)**
 
- - **dni**
- - **nombre_completo**
- - **tipo**
- - **moneda**
- - **fecha_apertura**
+### **Insersiones generales.**
 
-### view_depositos
+#### **Sucursales.**
+- **insertar_sucursal**(*...*)
 
- Muestra **todos** los **depositos** realizados.
+#### **Clientes.**
+- **insertar_cliente**(*...*)
 
- - **no_cuenta**
- - **monto**
- - **fecha**
+#### **Cuentas.**
+- **insertar_cuentas**(*...*)
 
-### view_retiros
+#### **Movimientos.**
+- **insertar_transferencia**(*...*)
+- **insertar_deposito**(*...*)
+- **insertar_retiro**(*...*)
 
- Muestra **todos** los **retiros** realizados.
 
- - **no_cuenta**
- - **monto**
- - **fecha**
+### **Búsquedas parametrizadas.**
 
-### view_transferencias
+#### **Sucursales.**
+- **buscar_id_por_nombre**(*...*)
+- **listar_clientes_por_sucursal**(*...*)
 
- Muestra **todas** las **transferencias** realizadas.
+#### **Clientes.**
+- **buscar_cliente_por_id**(*...*)
+- **buscar_cliente_por_dni**(*...*)
+- **listar_cuentas_por_cliente**(*...*)
 
- - **cuenta_origen**
- - **cliente_origen**
- - **monto**
- - **descripcion**
- - **cuenta_destino**
- - **cliente_destino**
- - **fecha**
+#### **Cuentas.**
+- **buscar_cuenta_por_id**(*...*)
 
-### view_cantidad_clientes
+#### **Movimientos.**
+- **buscar_movs_por_fecha**(*...*)
 
- Muestra un **conteo** de **clientes** por cada **sucursal**.
+### **Insersiones de logs.**
 
- - **nombre**
- - **clientes**
+#### **Registros**
 
-### view_cantidad_cuentas
+- **registrar_cliente**(*...*)
+- **registrar_cuenta**(*...*)
 
- Muestra un **conteo** de **cuentas** por cada **cliente**.
+## TRIGGERS
+###### Ver **[05_triggers.sql](./05_triggers.sql)**.
 
- - **dni**
- - **nombre_completo**
- - **cuentas**
+### **Insersiones**
+
+#### **Clientes**
+- **insertar_cliente** *AFTER INSERT ON clientes*
+
+#### **Cuentas**
+- **insertar_cuenta** *AFTER INSERT ON cuentas*
+
 
 ---
 
 Proyecto Realizado por **Viz Valentín.**
 
-Ultima modificación: 11/08/25
+Primera Modificación: *11/08/25*
 
-: - )
+Última modificación:  *07/09/25*
 
 ![final-image](./assets/final-image.png)
 
