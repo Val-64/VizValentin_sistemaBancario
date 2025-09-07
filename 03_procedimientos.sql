@@ -26,7 +26,7 @@
         b. CUENTA
 
 */
-USE proyecto_01;
+USE sist_bancario;
 
 -- --------------------- 1. Insersiones generales. --------------------- --
 

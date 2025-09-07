@@ -10,7 +10,7 @@
         c. Transferencias.
 */
 
-USE proyecto_01;
+USE sist_bancario;
 
 -- 1. Insertar registros en tabla -sucursales-.
 INSERT INTO sucursales (nombre, telefono, calle, altura) VALUES

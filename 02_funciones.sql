@@ -1,9 +1,6 @@
 /*
 	Funciones.
-    
-
 */
-
 
 -- Funcion destinada a concatenar nombre y apellido de clientes.
 DELIMITER //

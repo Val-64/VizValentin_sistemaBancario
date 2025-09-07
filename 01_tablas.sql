@@ -8,9 +8,9 @@
         5. Logs de clientes.
         6. Logs de cuentas.
 */
--- a. Creación de base de datos.
-CREATE DATABASE IF NOT EXISTS proyecto_01;
-USE proyecto_01;
+-- a. Creacion de base de datos
+CREATE DATABASE IF NOT EXISTS sist_bancario;
+USE sist_bancario;
 
 -- b. Creacion de tablas.
 

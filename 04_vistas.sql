@@ -13,7 +13,7 @@
     8. Cantidad de clientes por sucursal.
 */
 
-USE proyecto_01;
+USE sist_bancario;
 
 -- 1. CLIENTES: Ver todos los clientes.
 CREATE OR REPLACE VIEW view_clientes AS

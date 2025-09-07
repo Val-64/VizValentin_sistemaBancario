@@ -7,6 +7,8 @@
     
 */
 
+USE sist_bancario;
+
 -- 1. INSERSIONES.
 
 --    a. CLIENTES.
