@@ -61,3 +61,18 @@ INSERT INTO movimientos (cuenta_origen, cuenta_destino, monto, descripcion) VALU
 (2, 7, 1000, 'Expensas'),
 (4, 5, 50, 'Varios'),
 (1, 9, 3000, 'Comercial');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

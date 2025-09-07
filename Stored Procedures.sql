@@ -9,7 +9,6 @@
 			d-1. Transferencias.
             d-2. Depositos.
             d-3- Retiros.
-            
 	2. Búsquedas parametrizadas.
 		a. SUCURSALES
 			a-2. Buscar id por nombre.
@@ -22,6 +21,9 @@
 			c-1. Buscar cuenta por ID.
 		d. MOVIMIENTOS
 			d-1. Buscar movimientos por fecha.
+	3. Insersiones a tablas LOGS
+		a. CLIENTE
+        b. CUENTA
 
 */
 USE proyecto_01;
@@ -238,5 +240,40 @@ CREATE PROCEDURE buscar_movs_por_fecha(
      WHERE fecha LIKE CONCAT(p_fecha,'%');
 		
 END//
+
+-- 3. Insersiones a tablas LOGS
+
+--    a. Tabla de clientes.
+DELIMITER //
+CREATE PROCEDURE registrar_cliente(
+	p_cliente_id INT,
+    p_accion ENUM('Agregado', 'Eliminado', 'Modificado'),
+	p_nombre_completo VARCHAR(100),
+    p_dni INT
+)BEGIN
+	INSERT INTO cliente_logs VALUES
+    (DEFAULT, CURRENT_TIMESTAMP, p_accion, p_cliente_id, p_nombre_completo, p_dni);
+    
+END//
+
+-- b. Tabla de cuentas
+DELIMITER //
+CREATE PROCEDURE registrar_cuenta(
+	p_cuenta_id INT,
+    p_accion ENUM('Agregado', 'Eliminado', 'Modificado'),
+	p_tipo VARCHAR(50),
+    p_moneda VARCHAR(10),
+    p_cliente_id INT,
+    p_dni INT
+)BEGIN
+	INSERT INTO cuenta_logs VALUES
+    (DEFAULT, CURRENT_TIMESTAMP, p_accion, p_cuenta_id, p_tipo, p_moneda, p_cliente_id, p_dni);
+    
+END//
+
+
+
+
+
 
 

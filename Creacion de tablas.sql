@@ -72,9 +72,11 @@ CREATE TABLE IF NOT EXISTS movimientos(
 -- 5. Logs de clientes.
 CREATE TABLE IF NOT EXISTS cliente_logs(
 	log_id INT AUTO_INCREMENT,
-    cliente_id INT,
-    fecha DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    fecha DATETIME DEFAULT CURRENT_TIMESTAMP,
     accion ENUM('Agregado', 'Eliminado', 'Modificado') NOT NULL,
+    cliente_id INT,
+    nombre_completo VARCHAR(100),
+    dni INT,
     
 	PRIMARY KEY(log_id),
     FOREIGN KEY(cliente_id) REFERENCES clientes(cliente_id)
@@ -83,12 +85,17 @@ CREATE TABLE IF NOT EXISTS cliente_logs(
 -- 6. Logs de cuentas.
 CREATE TABLE IF NOT EXISTS cuenta_logs(
 	log_id INT AUTO_INCREMENT,
-    cuenta_id INT,
-    fecha DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    fecha DATETIME DEFAULT CURRENT_TIMESTAMP,
     accion ENUM('Agregado', 'Eliminado', 'Modificado') NOT NULL,
+    cuenta_id INT,
+    tipo VARCHAR(50),
+    moneda VARCHAR(10),
+    cliente_id INT,
+    cliente_dni INT,
     
 	PRIMARY KEY(log_id),
-    FOREIGN KEY(cuenta_id) REFERENCES cuentas(cuenta_id)
+    FOREIGN KEY(cuenta_id) REFERENCES cuentas(cuenta_id),
+    FOREIGN KEY(cliente_id) REFERENCES clientes(cliente_id)
 );
 
 
